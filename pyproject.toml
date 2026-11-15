@@ -1,0 +1,9 @@
+[project]
+name = "equilibrio-motor"
+version = "0.1.0"
+description = "Motor de IA reutilizable: ingesta, RAG con citas, evals y governance."
+requires-python = ">=3.12"
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]

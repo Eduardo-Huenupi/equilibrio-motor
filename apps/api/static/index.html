@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Knowledge AI · demo</title>
+<style>
+  :root { color-scheme: light dark; --borde: #8884; --acento: #0b6e6e; }
+  body { font: 16px/1.5 system-ui, sans-serif; max-width: 720px; margin: 2rem auto; padding: 0 1rem; }
+  h1 { font-size: 1.4rem; margin-bottom: .2rem; }
+  p.sub { margin-top: 0; opacity: .7; }
+  section { border: 1px solid var(--borde); border-radius: 10px; padding: 1rem; margin: 1rem 0; }
+  label { display: block; font-weight: 600; margin-bottom: .3rem; }
+  input[type=text], input[type=password] { width: 100%; padding: .55rem; border: 1px solid var(--borde); border-radius: 6px; box-sizing: border-box; font: inherit; }
+  button { margin-top: .6rem; padding: .55rem 1rem; border: 0; border-radius: 6px; background: var(--acento); color: #fff; font: inherit; cursor: pointer; }
+  .cita { border-left: 3px solid var(--acento); padding: .3rem .8rem; margin: .6rem 0; font-size: .9rem; }
+  .cita b { display: block; }
+  #respuesta { white-space: pre-wrap; }
+  .nota { font-size: .85rem; opacity: .7; }
+</style>
+</head>
+<body>
+<h1>Knowledge AI</h1>
+<p class="sub">Pregunta a tus documentos. Cada respuesta trae el documento y la página que la respalda.</p>
+
+<section>
+  <label for="clave">Clave de acceso</label>
+  <input id="clave" type="password" autocomplete="off" placeholder="X-API-Key">
+</section>
+
+<section>
+  <label for="archivo">1. Sube un documento (PDF, DOCX, TXT)</label>
+  <input id="archivo" type="file" accept=".pdf,.docx,.txt,.md">
+  <button id="subir">Subir</button>
+  <p id="estado-subida" class="nota"></p>
+</section>
+
+<section>
+  <label for="pregunta">2. Haz una pregunta</label>
+  <input id="pregunta" type="text" placeholder="¿Cuál es la asistencia mínima para ser promovido?">
+  <button id="preguntar">Preguntar</button>
+  <p id="respuesta"></p>
+  <div id="citas"></div>
+  <p id="meta" class="nota"></p>
+</section>
+
+<script>
+const el = id => document.getElementById(id);
+const cabeceras = () => ({ "X-API-Key": el("clave").value });
+
+async function llamar(ruta, opciones) {
+  const r = await fetch(ruta, opciones);
+  const datos = await r.json().catch(() => ({}));
+  if (!r.ok) throw new Error(datos.detail || ("Error " + r.status));
+  return datos;
+}
+
+el("subir").onclick = async () => {
+  const archivo = el("archivo").files[0];
+  if (!archivo) return;
+  const cuerpo = new FormData();
+  cuerpo.append("archivo", archivo);
+  el("estado-subida").textContent = "Procesando…";
+  try {
+    const d = await llamar("/documentos", { method: "POST", headers: cabeceras(), body: cuerpo });
+    el("estado-subida").textContent = `Listo: ${d.paginas} páginas, ${d.fragmentos} fragmentos indexados.`;
+  } catch (e) { el("estado-subida").textContent = e.message; }
+};
+
+el("preguntar").onclick = async () => {
+  el("respuesta").textContent = "Buscando…";
+  el("citas").replaceChildren();
+  el("meta").textContent = "";
+  try {
+    const d = await llamar("/preguntar", {
+      method: "POST",
+      headers: { ...cabeceras(), "Content-Type": "application/json" },
+      body: JSON.stringify({ pregunta: el("pregunta").value }),
+    });
+    el("respuesta").textContent = d.respuesta;
+    for (const c of d.citas) {
+      const caja = document.createElement("div");
+      caja.className = "cita";
+      const titulo = document.createElement("b");
+      titulo.textContent = `[${c.n}] ${c.documento}, página ${c.pagina}`;
+      const texto = document.createElement("span");
+      texto.textContent = c.extracto;
+      caja.append(titulo, texto);
+      el("citas").append(caja);
+    }
+    el("meta").textContent = `${d.latencia_ms} ms`;
+  } catch (e) { el("respuesta").textContent = e.message; }
+};
+el("pregunta").addEventListener("keydown", e => { if (e.key === "Enter") el("preguntar").click(); });
+</script>
+</body>
+</html>

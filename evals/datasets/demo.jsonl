@@ -1,0 +1,17 @@
+{"id": "col-01", "tipo": "normal", "pregunta": "¿A qué hora comienza la jornada escolar?", "documento": "reglamento_colegio_ejemplo.txt", "pagina": 1, "esperado": ["8:15"]}
+{"id": "col-02", "tipo": "normal", "pregunta": "¿A qué hora termina la jornada los viernes?", "documento": "reglamento_colegio_ejemplo.txt", "pagina": 1, "esperado": ["13:30"]}
+{"id": "col-03", "tipo": "normal", "pregunta": "¿Cuál es la asistencia mínima para ser promovido?", "documento": "reglamento_colegio_ejemplo.txt", "pagina": 2, "esperado": ["85"]}
+{"id": "col-04", "tipo": "normal", "pregunta": "¿Cuál es la nota mínima de aprobación?", "documento": "reglamento_colegio_ejemplo.txt", "pagina": 2, "esperado": ["4,0"]}
+{"id": "col-05", "tipo": "normal", "pregunta": "¿En qué plazo se justifican las inasistencias por enfermedad?", "documento": "reglamento_colegio_ejemplo.txt", "pagina": 2, "esperado": ["48 horas"]}
+{"id": "col-06", "tipo": "normal", "pregunta": "¿Se pueden usar teléfonos celulares durante las clases?", "documento": "reglamento_colegio_ejemplo.txt", "pagina": 3, "esperado": ["prohibido"]}
+{"id": "col-07", "tipo": "normal", "pregunta": "¿Cómo se sanciona una falta grave?", "documento": "reglamento_colegio_ejemplo.txt", "pagina": 3, "esperado": ["suspensión"]}
+{"id": "col-08", "tipo": "normal", "pregunta": "¿Cuándo se realizan las reuniones de apoderados?", "documento": "reglamento_colegio_ejemplo.txt", "pagina": 4, "esperado": ["primer martes"]}
+{"id": "col-09", "tipo": "normal", "pregunta": "¿Quién puede retirar a un estudiante durante la jornada?", "documento": "reglamento_colegio_ejemplo.txt", "pagina": 4, "esperado": ["apoderado titular"]}
+{"id": "cen-01", "tipo": "normal", "pregunta": "¿Quién puede acceder a la ficha clínica de un paciente?", "documento": "protocolo_centro_ejemplo.txt", "pagina": 1, "esperado": ["profesional tratante"]}
+{"id": "cen-02", "tipo": "normal", "pregunta": "¿Cada cuántas sesiones se entrega el informe de progreso?", "documento": "protocolo_centro_ejemplo.txt", "pagina": 2, "esperado": ["12 sesiones"]}
+{"id": "dif-01", "tipo": "dificil", "pregunta": "¿Qué pasa si un alumno llega tarde tres veces en un mes?", "documento": "reglamento_colegio_ejemplo.txt", "pagina": 1, "esperado": ["citación"]}
+{"id": "dif-02", "tipo": "dificil", "pregunta": "¿Con cuánta anticipación avisan la hora de atención?", "documento": "protocolo_centro_ejemplo.txt", "pagina": 2, "esperado": ["24 horas"]}
+{"id": "sin-01", "tipo": "sin_respuesta", "pregunta": "¿Cuánto cuesta la matrícula anual?"}
+{"id": "sin-02", "tipo": "sin_respuesta", "pregunta": "¿Cuál es el menú del casino los lunes?"}
+{"id": "sin-03", "tipo": "sin_respuesta", "pregunta": "¿Qué seguro cubre los accidentes deportivos?"}
+{"id": "sin-04", "tipo": "sin_respuesta", "pregunta": "¿Cuál es el sueldo de los docentes?"}
