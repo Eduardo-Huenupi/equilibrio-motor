@@ -60,7 +60,7 @@ El caso que falla es una paráfrasis ("llega tarde" por "atraso"): el modo local
 | --- | --- |
 | Motor, governance y API en modo local | Probado (49 pruebas automáticas + evals) |
 | Migración SQL de Supabase | Aplicada y probada con SQL (búsquedas, aislamiento por organización, auditoría inmutable) |
-| `AlmacenSupabase`, `RegistroSupabase` | Escritos, **sin probar contra una base real** |
+| `AlmacenSupabase`, `RegistroSupabase` | Probados contra Supabase real en un servidor propio: subida de documento, búsqueda con cita y cadena de auditoría íntegra |
 | `LLMAnthropic` (Claude) y `EmbedderVoyage` | Escritos, **sin probar con claves reales** |
 | Cola de aprobaciones | En memoria (la tabla `motor_acciones` ya existe en la migración) |
 | Autenticación | Claves por organización; siguiente paso: Supabase Auth (JWT) |
